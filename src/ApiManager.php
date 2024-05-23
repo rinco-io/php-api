@@ -1,26 +1,25 @@
 <?php
-
 namespace Rinco;
 
-class Rinco
+class ApiManager
 {
-
-    protected $baseURL;
     protected $jobId;
+    protected $token;
 
-    function __construct(string $baseURL, string $jobId) 
+    function __construct(string $jobId, string $token) 
     {
-        $this->baseURL = $baseURL;
         $this->jobId = $jobId;
+        $this->token = $token;
     }
-    public function getData(string $token): array
+    public function getData(): array
     {
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, $this->baseURL . $this->jobId);
+        $baseURL = getenv("RINCO_API_MANAGER_URL") ?? "https://rinco.io/api/";
+        curl_setopt($ch, CURLOPT_URL, $baseURL . $this->jobId);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Authorization: ' . $token,
+            'Authorization: ' . $this->token,
             'Content-Type: application/json',
         ]);
 

@@ -1,10 +1,11 @@
 {
-    "name": "douglasTakiuti/rinco-api-manager",
+    "name": "rinco-io/php-api",
     "description": "Conjunto de funções para facilitar o consumo da API da Rinco. Com ele, desenvolvedores podem integrar rapidamente suas aplicações à nossa API, economizando tempo e esforço na implementação das chamadas e no tratamento de respostas.",
     "type": "library",
     "require": {
         "php": ">=7.4"
     },
+    "license": "GPL-3.0-only",
     "autoload": {
         "psr-4": {
             "Rinco\\": "src/"
