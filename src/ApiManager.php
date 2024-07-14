@@ -1,6 +1,8 @@
 <?php
 namespace Rinco;
 
+use Exception;
+
 class ApiManager
 {
     protected $jobId;
@@ -25,8 +27,14 @@ class ApiManager
 
         $response = curl_exec($ch);
 
+        if ($response === false) {
+            $error_code = curl_errno($ch);
+            $error_message = curl_error($ch);
+            throw new Exception("cURL Error ($error_code): $error_message");
+        }
+
         curl_close($ch);
 
-        return json_decode($response, true);
+        return json_decode($response);
     }
 }
